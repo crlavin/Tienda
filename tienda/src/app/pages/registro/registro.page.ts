@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/shared/servicess/auth.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-registro',
@@ -16,7 +17,8 @@ export class RegistroPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastController: ToastController, private authService: AuthService,
+    private authService: AuthService,
+    private firestore: AngularFirestore
   ) {
     this.formularioR = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -44,8 +46,51 @@ export class RegistroPage implements OnInit {
     }
   }
   signUp(email: string, password: string) {
-    this.authService.signUpWithEmailAndPassword(email, password);
+    this.authService.signUpWithEmailAndPassword(email, password)
+      .then((userCredential: any) => {
+        // Verificar si userCredential no es null ni undefined
+        if (userCredential && userCredential.user) {
+          // El usuario se ha registrado exitosamente
+          const user = userCredential.user;
+  
+          // Obtener datos del formulario
+          const nombreControl = this.formularioR.get('nombre');
+          const correoControl = this.formularioR.get('correo');
+  
+          // Verificar si los controles del formulario no son nulos
+          if (nombreControl && correoControl) {
+            const nombre = nombreControl.value;
+            const correo = correoControl.value;
+  
+            // Crear un objeto con los datos del usuario
+            const userData = {
+              nombre: nombre,
+              correo: correo,
+              // Otros campos si es necesario
+            };
+  
+            // Guardar datos del usuario en la colección "Usuario" de Firebase
+            this.firestore.collection('Usuario').doc(user.uid).set(userData)
+              .then(() => {
+                console.log('Datos del usuario guardados en Firebase.');
+              })
+              .catch((error) => {
+                console.error('Error al guardar datos del usuario en Firebase:', error);
+              });
+          } else {
+            console.error('Alguno de los controles del formulario es nulo.');
+          }
+        } else {
+          console.error('La credencial del usuario es nula o no tiene la propiedad "user".');
+        }
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error('Error al registrar el usuario:', error);
+      });
   }
+  
+  
 
   ngOnInit() { }
 
@@ -91,16 +136,7 @@ export class RegistroPage implements OnInit {
     return null;
   }
 
-  async mostrarToastExito() {
-    const toast = await this.toastController.create({
-      message: 'El registro se ha realizado correctamente.',
-      duration: 2000,
-      position: 'top',
-      color: 'success',
-    });
-    toast.present();
-  }
-
+  
   submitForm() {
     if (this.formularioR.valid) {
 

@@ -9,20 +9,22 @@
 
 <ion-content>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let item of itemsInCart">
       <ion-thumbnail slot="start">
-       </ion-thumbnail>
+        <img src="{{ item.imageUrl }}">
+      </ion-thumbnail>
       <ion-label>
-        <p>Nombre:</p>
-        <p>Precio: </p>
-        <p>Cantidad: </p>
-        <p>fecha:</p>
+        <h2>{{ item.nombre }}</h2>
+        <p>Precio: {{ item.precio | currency:'':'symbol':'1.0-0'}}</p>
+        <p>Cantidad: {{ item.cantidad }}</p>
       </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label>Total: </ion-label>
+      <ion-label>Total: {{ calcularTotal() | currency:'':'symbol':'1.0-0' }}</ion-label>
     </ion-item>
+    <ion-button expand="default" color="success" (click)="vaciarCarrito()" class="buton">Borrar Historial<ion-icon
+        name="trash"></ion-icon></ion-button>
     <ion-button expand="full" color="success" (click)="home()">aceptar</ion-button>
   </ion-list>
 </ion-content>
