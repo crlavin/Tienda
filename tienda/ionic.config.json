@@ -1,8 +1,0 @@
-{
-  "name": "tienda",
-  "integrations": {
-    "capacitor": {},
-    "cordova": {}
-  },
-  "type": "angular"
-}
