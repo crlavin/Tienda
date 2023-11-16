@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modificar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Apellido del Usuario</ion-label>
+      <ion-input [(ngModel)]="userApellido" placeholder="Apellido"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-input [(ngModel)]="direccion" placeholder="Dirección"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Edad</ion-label>
+      <ion-input [(ngModel)]="edad" type="number" placeholder="Edad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">ID</ion-label>
+      <ion-input [(ngModel)]="id" placeholder="ID"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Rut</ion-label>
+      <ion-input [(ngModel)]="rut" placeholder="Rut"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Sexo</ion-label>
+      <ion-input [(ngModel)]="sexo" placeholder="Sexo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input [(ngModel)]="contrasena" placeholder="Contraseña"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input [(ngModel)]="email" placeholder="Email"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button color="success" expand="block" (click)="modificarUsuario()">Modificar Usuario</ion-button>
+</ion-content>
