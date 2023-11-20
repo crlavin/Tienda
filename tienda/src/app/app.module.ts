@@ -11,9 +11,13 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthService, LOGGED_IN_USER_EMAIL } from 'src/app/shared/servicess/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent],
   imports: [BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
      IonicModule.forRoot(), 
@@ -22,12 +26,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
      AngularFireAuthModule,
      AngularFireStorageModule,
      AngularFireDatabaseModule,
-     AngularFirestoreModule],
+     AngularFirestoreModule,
+     HttpClientModule,
+     FormsModule
+    ],
      
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-     
-  ],
+     providers: [
+      AuthService,
+      { provide: LOGGED_IN_USER_EMAIL, useValue: '' },
+      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      // ... otros servicios y proveedores aquí
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

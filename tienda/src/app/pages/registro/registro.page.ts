@@ -52,23 +52,25 @@ export class RegistroPage implements OnInit {
         if (userCredential && userCredential.user) {
           // El usuario se ha registrado exitosamente
           const user = userCredential.user;
-  
+
           // Obtener datos del formulario
           const nombreControl = this.formularioR.get('nombre');
           const correoControl = this.formularioR.get('correo');
-  
+
+
+
           // Verificar si los controles del formulario no son nulos
           if (nombreControl && correoControl) {
             const nombre = nombreControl.value;
             const correo = correoControl.value;
-  
+
             // Crear un objeto con los datos del usuario
             const userData = {
               nombre: nombre,
               correo: correo,
               // Otros campos si es necesario
             };
-  
+
             // Guardar datos del usuario en la colección "Usuario" de Firebase
             this.firestore.collection('Usuario').doc(user.uid).set(userData)
               .then(() => {
@@ -89,8 +91,8 @@ export class RegistroPage implements OnInit {
         console.error('Error al registrar el usuario:', error);
       });
   }
-  
-  
+
+
 
   ngOnInit() { }
 
@@ -136,11 +138,13 @@ export class RegistroPage implements OnInit {
     return null;
   }
 
-  
+
   submitForm() {
     if (this.formularioR.valid) {
 
     }
+
+
   }
   login() {
     this.router.navigate(['/login']);

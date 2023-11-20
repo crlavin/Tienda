@@ -30,15 +30,14 @@
                 <ion-label>Maceteros</ion-label><ion-icon name="color-fill-outline"></ion-icon>
               </ion-item>
             </ion-list>
-              <ion-item (click)="redirectTo('Admin')">
-              <ion-label>Administracion</ion-label><ion-icon name="build-outline"></ion-icon>
-            </ion-item>
-            
           </ion-item-group>
         </ion-list>
       </ion-content>
+      <ion-button *ngIf="flag" color="success" (click)="logOut()" expand="block">Desloguear</ion-button>
     </ion-menu>
-
+    <div *ngIf="showSplash" class="splash">
+      <img src="imgs/fondo.jpg" alt="Splash Screen">
+    </div>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

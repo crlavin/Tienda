@@ -12,7 +12,7 @@ import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/fo
 })
 export class LoginPage implements OnInit {
 	formulario: FormGroup;
-    
+	
 	constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
 		this.formulario = this.formBuilder.group({
 			correo: [
@@ -31,14 +31,14 @@ export class LoginPage implements OnInit {
 			],
 
 		});
-
+		
 	}
 	logIn(email: string, password: string) {
 		this.authService.logInWithEmailAndPassword(email, password);
-
+		this.authService.setLoggedInUserEmail(email);
 	}
 
-	
+
 	ngOnInit() { }
 	containsLetter() {
 		return (control: AbstractControl) => {
@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
 		};
 
 	}
-	
+
 	olvidocontra() {
 		this.router.navigate(['/olvido-contra']);
 
@@ -90,11 +90,11 @@ export class LoginPage implements OnInit {
 
 	}
 	submitForm() {
-		
+
 
 	}
 
-	
+
 
 }
 

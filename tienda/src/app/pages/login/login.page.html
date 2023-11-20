@@ -43,8 +43,7 @@
       <p class="signup-text">¿Eres un nuevo usuario?<a (click)="registro()">Inscríbete</a></p>
       <ion-button class="login-button" type="submit" [disabled]="formulario.invalid" expand="block" color="success"
         (click)="logIn((email.value ?? '').toString(), (password.value ?? '').toString())">Inicia sesión</ion-button>
-      <ion-button type="click" class="google-button" expand="block"><ion-icon
-          name="logo-google"></ion-icon>oogle</ion-button>
+      
 
 
     </form>

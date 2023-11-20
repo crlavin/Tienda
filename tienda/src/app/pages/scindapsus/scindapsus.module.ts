@@ -14,6 +14,7 @@ import { ScindapsusPage } from './scindapsus.page';
     FormsModule,
     IonicModule,
     ScindapsusPageRoutingModule
+    
   ],
   declarations: [ScindapsusPage]
 })
