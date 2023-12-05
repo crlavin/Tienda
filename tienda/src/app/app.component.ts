@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/servicess/auth.service';
+import { FlagService } from 'src/app/flag.service'
 
 @Component({
   selector: 'app-root',
@@ -8,23 +9,18 @@ import { AuthService } from 'src/app/shared/servicess/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  showSplash = true;
   private openSubcategories: { [category: string]: boolean } = {};
   loggedInUserEmail: string = ""
-  flag: boolean = false;
   nombreProducto: string = "";
   resultados: any[] = [];
   constructor(private router: Router,
     private authService: AuthService,
-    ) {
-    setTimeout(() => {
-      this.showSplash = false;
-    }, 3000); // Establece el tiempo que deseas que se muestre el splash screen (en milisegundos)
-    this.loggedInUserEmail = this.authService.getLoggedInUserEmail();
+    private flagService: FlagService
+  ) {
+
   }
   login() {
     this.router.navigate(['/login']);
-    this.flag = true;
   }
 
   redirectTo(category: string) {
@@ -53,8 +49,17 @@ export class AppComponent {
   }
   logOut() {
     this.authService.logOut();
-    this.flag = false;
+    this.flagService.setFlag(false);
   }
-
-  
+  obtenerFlag(): boolean {
+    return this.flagService.getFlag();
+  }
+  obtenerFlag2(): boolean {
+    this.loggedInUserEmail = this.authService.getLoggedInUserEmail();
+    if (this.loggedInUserEmail == 'admin@gmail.com') {
+      // If true, call the getFlag method on the flagService
+      return this.flagService.getFlag();
+    }
+    return false
+  }
 }

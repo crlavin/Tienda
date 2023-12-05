@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/servicess/auth.service';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
-
+import { FlagService } from 'src/app/flag.service'
 
 @Component({
 	selector: 'app-login',
@@ -12,8 +12,9 @@ import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/fo
 })
 export class LoginPage implements OnInit {
 	formulario: FormGroup;
-	
-	constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
+	constructor(private formBuilder: FormBuilder, private router: Router,
+		private authService: AuthService,
+		private flagService: FlagService) {
 		this.formulario = this.formBuilder.group({
 			correo: [
 				'',
@@ -31,11 +32,12 @@ export class LoginPage implements OnInit {
 			],
 
 		});
-		
+
 	}
 	logIn(email: string, password: string) {
 		this.authService.logInWithEmailAndPassword(email, password);
 		this.authService.setLoggedInUserEmail(email);
+		this.flagService.setFlag(true);
 	}
 
 
@@ -94,7 +96,9 @@ export class LoginPage implements OnInit {
 
 	}
 
-
+	cambiarFlag(): void {
+		this.flagService.setFlag(true);
+	}
 
 }
 

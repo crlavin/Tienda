@@ -5,8 +5,8 @@
     </ion-buttons>
     <ion-title>Perfil de Usuario</ion-title>
   </ion-toolbar>
+  
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-avatar>
     <ion-img [src]="userProfileImage"></ion-img>
@@ -16,14 +16,22 @@
   <ion-list>
     <ion-item>
       <ion-label>Nombre:</ion-label>
-      <ion-text>{{ name }}</ion-text>
+      <ion-text>{{ loggedInUserName }}</ion-text>
     </ion-item>
     <ion-item>
       <ion-label>Email:</ion-label>
       <ion-text>{{ loggedInUserEmail }}</ion-text>
     </ion-item>
+
+    <!-- Nueva entrada para la contraseña -->
+    <ion-item>
+      <ion-label>Nueva Contraseña:</ion-label>
+      <ion-input type="password" [(ngModel)]="newPassword"></ion-input>
+    </ion-item>
   </ion-list>
+
+  <!-- Botón para cambiar la contraseña -->
+  <ion-button expand="block" (click)="changePassword(newPassword)" class="small-button" color="success">Cambiar Contraseña</ion-button>
+
   <ion-button expand="block" (click)="goToHome()" class="small-button" color="success">Aceptar</ion-button>
-
-
 </ion-content>

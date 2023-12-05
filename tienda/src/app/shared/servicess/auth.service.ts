@@ -31,27 +31,25 @@ export class AuthService {
   }
 
   // iniciar sesión con correo electrónico y contraseña
-  logInWithEmailAndPassword(email: string, password: string) {
-    return this.firebaseAuthenticationService.signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        this.userData = userCredential.user
-        this.observeUserState()
-      })
-      .catch((error) => {
-        alert(error.message);
-      })
+  async logInWithEmailAndPassword(email: string, password: string) {
+    try {
+      const userCredential = await this.firebaseAuthenticationService.signInWithEmailAndPassword(email, password);
+      this.userData = userCredential.user;
+      this.observeUserState();
+    } catch (error) {
+      alert(error);
+    }
   }
   
   // registrarse con correo electrónico y contraseña
-  signUpWithEmailAndPassword(email: string, password: string) {
-    return this.firebaseAuthenticationService.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        this.userData = userCredential.user
-        this.observeUserState()
-      })
-      .catch((error) => {
-        alert(error.message);
-      })
+  async signUpWithEmailAndPassword(email: string, password: string) {
+    try {
+      const userCredential = await this.firebaseAuthenticationService.createUserWithEmailAndPassword(email, password);
+      this.userData = userCredential.user;
+      this.observeUserState();
+    } catch (error) {
+      alert(error);
+    }
   }
 
   observeUserState() {
@@ -67,11 +65,10 @@ export class AuthService {
   }
 
   // Cerrar sesión
-  logOut() {
-    return this.firebaseAuthenticationService.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['login']);
-    })
+  async logOut() {
+    await this.firebaseAuthenticationService.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['login']);
   }
 
   setLoggedInUserEmail(email: string) {
@@ -83,3 +80,4 @@ export class AuthService {
   }
  
 }
+

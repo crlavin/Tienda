@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { AuthService, LOGGED_IN_USER_EMAIL } from 'src/app/shared/servicess/auth.service';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicRouteStrategy } from '@ionic/angular';
+
+
 describe('AppComponent', () => {
 
   beforeEach(async () => {

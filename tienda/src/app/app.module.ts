@@ -14,7 +14,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthService, LOGGED_IN_USER_EMAIL } from 'src/app/shared/servicess/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { FlagService } from 'src/app/flag.service'
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +35,7 @@ import { FormsModule } from '@angular/forms';
       AuthService,
       { provide: LOGGED_IN_USER_EMAIL, useValue: '' },
       { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      FlagService
       // ... otros servicios y proveedores aquí
     ],
   bootstrap: [AppComponent],

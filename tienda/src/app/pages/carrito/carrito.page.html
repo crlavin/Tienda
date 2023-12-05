@@ -30,8 +30,7 @@
     </ion-item>
     <ion-button expand="default" color="success" (click)="vaciarCarrito()" class="buton">Vaciar Carrito<ion-icon
         name="trash"></ion-icon></ion-button>
-    <ion-button *ngFor="let item of itemsInCart" expand="full" color="success"
-      (click)="mostrarMensajeCompraExitosa(); aceptarPedido(); actualizarStockClick(item.id)">Pagar</ion-button>
+    <ion-button expand="full" color="success" (click)="realizarPago()">Pagar</ion-button>
 
   </ion-list>
 </ion-content>

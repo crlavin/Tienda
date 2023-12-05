@@ -117,12 +117,40 @@ const routes: Routes = [
     path: 'pedido',
     loadChildren: () => import('./pages/pedido/pedido.module').then(m => m.PedidoPageModule)
   },
- 
-    {
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule)
+  },
+
+  {
+    path: 'agregar-producto',
+    loadChildren: () => import('./pages/agregar-producto/agregar-producto.module').then(m => m.AgregarProductoPageModule)
+  },
+  {
+    path: 'agregar-usuario',
+    loadChildren: () => import('./pages/agregar-usuario/agregar-usuario.module').then(m => m.AgregarUsuarioPageModule)
+  },
+  {
+    path: 'eliminar-usuario',
+    loadChildren: () => import('./pages/eliminar-usuario/eliminar-usuario.module').then(m => m.EliminarUsuarioPageModule)
+  },
+  {
+    path: 'eliminar-producto',
+    loadChildren: () => import('./pages/eliminar-producto/eliminar-producto.module').then(m => m.EliminarProductoPageModule)
+  },
+  {
+    path: 'modificar-producto',
+    loadChildren: () => import('./pages/modificar-producto/modificar-producto.module').then(m => m.ModificarProductoPageModule)
+  },
+  {
+    path: 'modificar-usuario',
+    loadChildren: () => import('./pages/modificar-usuario/modificar-usuario.module').then(m => m.ModificarUsuarioPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'not-found' // Redirige cualquier ruta no coincidente a la página de error 404
   },
-  
+
 
 ];
 

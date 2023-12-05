@@ -4,7 +4,6 @@ import { CarritoService } from 'src/app/services/carrito.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.page.html',
@@ -12,27 +11,33 @@ import { Observable } from 'rxjs';
 })
 export class PedidoPage {
   pedidos: Observable<any[]> = new Observable<any[]>();
-  constructor(private router: Router,
+
+  constructor(
+    private router: Router,
     private cartService: CarritoService,
-    private firestore: AngularFirestore) { }
+    private firestore: AngularFirestore
+  ) {}
 
   ngOnInit() {
     this.pedidos = this.firestore.collection('Pedido').valueChanges();
   }
 
   eliminarPedido() {
-    // Llama al servicio para eliminar todos los productos del carrito
     this.cartService.eliminarPedido();
-    // Luego, actualiza la lista de productos en el carrito
-
   }
+
   calcularTotal(cantidad: number, precio: number): number {
     return cantidad * precio;
   }
 
   home() {
     this.router.navigate(['/home']);
-
   }
 
+  // Método para eliminar duplicados en base al nombre del producto
+  obtenerPedidosUnicos(pedidos: any[]): any[] {
+    const uniquePedidos = Array.from(new Set(pedidos.map(pedido => pedido.productos['0'].nombre)))
+      .map(nombre => pedidos.find(pedido => pedido.productos['0'].nombre === nombre));
+    return uniquePedidos;
+  }
 }

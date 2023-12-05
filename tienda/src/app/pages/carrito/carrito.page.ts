@@ -86,7 +86,15 @@ export class CarritoPage implements OnInit {
   actualizarStockClick(idProducto: string) {
     this.cartService.actualizarStock(idProducto);
   }
-}
 
+  realizarPago() {
+    // Perform actions for each item in the cart
+    for (const item of this.itemsInCart) {
+      this.mostrarMensajeCompraExitosa();
+      this.aceptarPedido();
+      this.actualizarStockClick(item.id);
+    }
+}
+}
 
 
